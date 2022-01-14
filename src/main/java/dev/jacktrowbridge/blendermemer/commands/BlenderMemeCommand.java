@@ -7,13 +7,14 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.awt.*;
+import java.util.Random;
 
 public class BlenderMemeCommand extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event){
         Message message = event.getMessage();
-        if(message.getContentRaw().equalsIgnoreCase("!blendermeme")){
+        if(message.getContentRaw().equalsIgnoreCase("!blendermeme") || message.getContentRaw().equalsIgnoreCase("!bmeme")){
             MessageChannel channel = message.getGuildChannel();
 
             // Create the EmbedBuilder instance
@@ -57,7 +58,11 @@ public class BlenderMemeCommand extends ListenerAdapter {
     Arg: image url as string
  */
 
-            eb.setImage("https://raw.githubusercontent.com/zekroTJA/DiscordBot/master/.websrc/logo%20-%20title.png");
+            Random random = new Random();
+            int range = 1196 - 1 + 1;
+            int randomImage = random.nextInt(range) + 1;
+
+            eb.setImage("https://raw.githubusercontent.com/JackTrowbridge/Blender-Memes-Images/master/"+ randomImage +".jpg");
 
             channel.sendMessageEmbeds(eb.build()).queue();
         }
